@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AFC1AF532173878100E39EBA /* PortalMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1AF522173878100E39EBA /* PortalMask.swift */; };
+		AFC1AF5A2173A02300E39EBA /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1AF592173A02300E39EBA /* UIBezierPath+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		AFC1AF4F2173878100E39EBA /* libPortalMask.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPortalMask.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC1AF522173878100E39EBA /* PortalMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalMask.swift; sourceTree = "<group>"; };
+		AFC1AF592173A02300E39EBA /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC1AF522173878100E39EBA /* PortalMask.swift */,
+				AFC1AF592173A02300E39EBA /* UIBezierPath+Extensions.swift */,
 			);
 			path = PortalMask;
 			sourceTree = "<group>";
@@ -120,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFC1AF532173878100E39EBA /* PortalMask.swift in Sources */,
+				AFC1AF5A2173A02300E39EBA /* UIBezierPath+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
