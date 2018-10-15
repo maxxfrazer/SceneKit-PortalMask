@@ -43,6 +43,41 @@ open class PortalMask: SCNNode {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+	/**
+	Initializes a Portal of a given radius with a square outer mask.
+
+	- Parameters:
+		- radius: [CGFloat](apple-reference-documentation://hsX1m9hE7m) of the required portal
+		- subdivisions: How circular the desired circle will be. Default is 8, creating a circle with 256 (2^8) vertices on the inside. Minimum is 2 and will produce a square with vertices on the sides, top and bottom.
+		- depth: Optional depth the portal should go back. If no value is given it will default to four times the radius
+		- outerMult: Optional size the mask around the frame should be. The default is six times the radius.
+
+	- Returns: A new rectangular portal
+	*/
+	public init(radius: CGFloat, subdivisions: Int = 7, depth: CGFloat! = nil, outerMult: CGFloat = 6) {
+		super.init()
+		// have a minimum subdivisions here because the circle must have at least 4 points
+		let segments = 1 << max(2, subdivisions)
+		let depth = depth ?? radius * 4
+		self.bezierPath.usesEvenOddFillRule = true
+		let hiderSize = radius * max(1,outerMult)
+		self.bezierPath.addFrame(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: hiderSize, height: hiderSize)))
+
+		self.bezierPath.move(to: CGPoint(x: radius, y: 0))
+		let angleInc = (.pi * 2) / CGFloat(segments)
+		var currentAngle: CGFloat = angleInc
+		while currentAngle < .pi * 2 {
+			let newPoint = CGPoint(x: radius * cos(currentAngle), y: radius * sin(currentAngle))
+			bezierPath.addLine(to: newPoint)
+			currentAngle += angleInc
+		}
+		self.bezierPath.close()
+
+		self.geometryHolder.geometry = self.maskSCNShape(path: self.bezierPath, extrusionDepth: depth)
+		self.geometryHolder.position.z = Float(-depth / 2) + 0.0003
+		self.addChildNode(self.geometryHolder)
+	}
+
 	private let geometryHolder = SCNNode()
 	private var bezierPath = UIBezierPath()
 
