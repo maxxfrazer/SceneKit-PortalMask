@@ -44,6 +44,37 @@ open class PortalMask: SCNNode {
 	}
 
 	/**
+	Initializes a Portal of a given radius with a circular outer mask at the cost of using almost double vertices than the other circular portal.
+
+	- Parameters:
+		- radius: [CGFloat](apple-reference-documentation://hsX1m9hE7m) of the required portal
+		- subdivisions: How circular the desired circle will be. Default is 7, creating a circle with 128 (2^7) vertices on the inside. Minimum is 2 and will produce a square with vertices on the sides, top and bottom.
+		- depth: Optional depth the portal should go back. If no value is given it will default to four times the radius
+		- outerMult: Optional size the mask around the frame should be. The default is six times the radius.
+
+	- Returns: A new rectangular portal
+	*/
+	public class func tube(radius: CGFloat, subdivisions: Int = 7, depth: CGFloat! = nil, outerMult: CGFloat = 5) -> PortalMask {
+		let node = PortalMask()
+		let segments = 1 << max(2, subdivisions)
+		let depth = depth ?? radius * 2
+		let shape = SCNTube(innerRadius: radius / 1.975, outerRadius: radius * outerMult, height: depth)
+		shape.radialSegmentCount = segments
+		let mask = SCNMaterial()
+		mask.colorBufferWriteMask = SCNColorMask(rawValue: 0)
+		mask.isDoubleSided = true
+		let seeInside = SCNMaterial()
+		seeInside.diffuse.contents = UIColor.clear
+		shape.materials = [mask, seeInside]
+
+		node.geometryHolder.geometry = shape
+		node.geometryHolder.eulerAngles.x = -.pi / 2
+		node.geometryHolder.position.z = Float(-depth / 2) + 0.0003
+		node.addChildNode(node.geometryHolder)
+		return node
+	}
+
+	/**
 	Initializes a Portal of a given radius with a square outer mask.
 
 	- Parameters:
@@ -76,6 +107,10 @@ open class PortalMask: SCNNode {
 		self.geometryHolder.geometry = self.maskSCNShape(path: self.bezierPath, extrusionDepth: depth)
 		self.geometryHolder.position.z = Float(-depth / 2) + 0.0003
 		self.addChildNode(self.geometryHolder)
+	}
+
+	private override init() {
+		super.init()
 	}
 
 	private let geometryHolder = SCNNode()
