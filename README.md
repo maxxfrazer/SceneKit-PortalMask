@@ -25,4 +25,5 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
 
 ```
 
-![Tracking Portal example](media/PortalMask-example.gif)
+![Tracking Portal Example](media/PortalMask-example.gif)
+![Flappy Bird Example](media/PortalMask-FlappyBird.gif)
