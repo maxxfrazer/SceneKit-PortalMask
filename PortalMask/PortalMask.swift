@@ -8,19 +8,18 @@
 
 import SceneKit.SCNNode
 
-// MARK: -
 /// A node containing a geometry that will create a portal of the specified properties and dimensions.
 open class PortalMask: SCNNode {
-	/**
-	Initializes a Portal of a given width and height.
 
-	- Parameters:
-		- frameSize: [CGSize](apple-reference-documentation://hsWG5FZjhU) of the width and height the portal should be
-		- depth: Optional depth the portal should go back. If no value is given it will default to twice the largest dimention of the frame
-		- outerMult: Optional size the mask around the frame should be. The default is three times the largest dimention of the frame.
-
-	- Returns: A new rectangular portal
-	*/
+	/// Initializes a Portal of a given width and height.
+	///
+	/// - Parameters:
+	///   - frameSize: [CGSize](apple-reference-documentation://hsWG5FZjhU) of the width and height the
+	///       portal should be
+	///   - depth: Optional depth the portal should go back. If no value is given it will default to twice
+	///       the largest dimention of the frame
+	///   - outerMult: Optional size the mask around the frame should be. The default is three times
+	///       the largest dimention of the frame.
 	public init(frameSize: CGSize, depth: CGFloat! = nil, outerMult: CGFloat = 3) {
 		super.init()
 		let depth = depth ?? max(frameSize.width, frameSize.height) * 2
@@ -43,17 +42,18 @@ open class PortalMask: SCNNode {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	/**
-	Initializes a Portal of a given radius with a circular outer mask at the cost of using almost double vertices than the other circular portal.
-
-	- Parameters:
-		- radius: [CGFloat](apple-reference-documentation://hsX1m9hE7m) of the required portal
-		- subdivisions: How circular the desired circle will be. Default is 7, creating a circle with 128 (2^7) vertices on the inside. Minimum is 2 and will produce a square with vertices on the sides, top and bottom.
-		- depth: Optional depth the portal should go back. If no value is given it will default to four times the radius
-		- outerMult: Optional size the mask around the frame should be. The default is six times the radius.
-
-	- Returns: A new rectangular portal
-	*/
+	/// Initializes a Portal of a given radius with a circular outer mask at the cost of using almost double
+	/// vertices than the other circular portal.
+	///
+	/// - Parameters:
+	///   - radius: [CGFloat](apple-reference-documentation://hsX1m9hE7m) of the required portal
+	///   - subdivisions: How circular the desired circle will be. Default is 7, creating a circle with
+	///       128 (2^7) vertices on the inside. Minimum is 2 and will produce a square with vertices
+	///       on the sides, top and bottom.
+	///   - depth: Optional depth the portal should go back. If no value is given it will default to
+	///       four times the radius
+	///   - outerMult: Optional size the mask around the frame should be. The default is six times the radius.
+	/// - Returns: A new rectangular portal
 	public class func tube(radius: CGFloat, subdivisions: Int = 7, depth: CGFloat! = nil, outerMult: CGFloat = 5) -> PortalMask {
 		let node = PortalMask()
 		let segments = 1 << max(2, subdivisions)
@@ -74,17 +74,17 @@ open class PortalMask: SCNNode {
 		return node
 	}
 
-	/**
-	Initializes a Portal of a given radius with a square outer mask.
-
-	- Parameters:
-		- radius: [CGFloat](apple-reference-documentation://hsX1m9hE7m) of the required portal
-		- subdivisions: How circular the desired circle will be. Default is 8, creating a circle with 256 (2^8) vertices on the inside. Minimum is 2 and will produce a square with vertices on the sides, top and bottom.
-		- depth: Optional depth the portal should go back. If no value is given it will default to four times the radius
-		- outerMult: Optional size the mask around the frame should be. The default is six times the radius.
-
-	- Returns: A new rectangular portal
-	*/
+	/// Initializes a Portal of a given radius with a square outer mask.
+	///
+	/// - Parameters:
+	///   - radius: [CGFloat](apple-reference-documentation://hsX1m9hE7m) of the required portal
+	///   - subdivisions: How circular the desired circle will be. Default is 8, creating a circle
+	///       with 256 (2^8) vertices on the inside. Minimum is 2 and will produce a square with
+	///       vertices on the sides, top and bottom.
+	///   - depth: Optional depth the portal should go back. If no value is given it will default to
+	///       four times the radius
+	///   - outerMult: Optional size the mask around the frame should be.
+	///       The default is six times the radius.
 	public init(radius: CGFloat, subdivisions: Int = 7, depth: CGFloat! = nil, outerMult: CGFloat = 6) {
 		super.init()
 		// have a minimum subdivisions here because the circle must have at least 4 points
