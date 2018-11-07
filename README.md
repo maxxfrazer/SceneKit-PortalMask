@@ -11,15 +11,19 @@ The following example code creates a portal ontop of a tracking marker, similar 
 ```
 func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 	if let imageAnchor = anchor as? ARImageAnchor {
+		let nodeRotated = SCNNode()
+		nodeRotated.eulerAngles.x = -.pi / 2
 		// the next 2 lines add the portal
 		let portal = PortalMask(frameSize: imageAnchor.referenceImage.physicalSize)
-		node.addChildNode(portal)
+		nodeRotated.addChildNode(portal)
 
 		// the next 4 lines add a cube inside the image area
 		let width = imageAnchor.referenceImage.physicalSize.width
 		let boxNode = SCNNode(geometry: SCNBox(width: width, height: width, length: width, chamferRadius: 0))
 		boxNode.position.z = -boxNode.width
-		node.addChildNode(boxNode)
+		nodeRotated.addChildNode(boxNode)
+
+		node.addChild(nodeRotated)
 	}
 }
 
