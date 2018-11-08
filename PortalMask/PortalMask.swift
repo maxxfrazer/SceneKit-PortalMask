@@ -68,7 +68,6 @@ open class PortalMask: SCNNode {
 		shape.materials = [mask, seeInside]
 
 		node.geometryHolder.geometry = shape
-		node.geometryHolder.eulerAngles.x = -.pi / 2
 		node.geometryHolder.position.z = Float(-depth / 2) + 0.0003
 		node.addChildNode(node.geometryHolder)
 		return node
