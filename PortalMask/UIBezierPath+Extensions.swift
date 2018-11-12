@@ -8,7 +8,7 @@
 
 import UIKit
 
-private func +(left: CGPoint, right: CGPoint) -> CGPoint {
+private func + (left: CGPoint, right: CGPoint) -> CGPoint {
 	return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
 

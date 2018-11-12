@@ -25,7 +25,7 @@ open class PortalMask: SCNNode {
 		let depth = depth ?? max(frameSize.width, frameSize.height) * 2
 		self.bezierPath.usesEvenOddFillRule = true
 
-		let hiderSize = max(frameSize.width, frameSize.height) * max(1,outerMult)
+		let hiderSize = max(frameSize.width, frameSize.height) * max(1, outerMult)
 		self.bezierPath.addFrame(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: hiderSize, height: hiderSize)))
 
 		// dividing by exactly 2 doesn't work so well for tracking images
@@ -54,7 +54,10 @@ open class PortalMask: SCNNode {
 	///       four times the radius
 	///   - outerMult: Optional size the mask around the frame should be. The default is six times the radius.
 	/// - Returns: A new rectangular portal
-	public class func tube(radius: CGFloat, subdivisions: Int = 7, depth: CGFloat! = nil, outerMult: CGFloat = 5) -> PortalMask {
+	public class func tube(
+		radius: CGFloat, subdivisions: Int = 7,
+		depth: CGFloat! = nil, outerMult: CGFloat = 5
+	) -> PortalMask {
 		let node = PortalMask()
 		let segments = 1 << max(2, subdivisions)
 		let depth = depth ?? radius * 2
@@ -90,7 +93,7 @@ open class PortalMask: SCNNode {
 		let segments = 1 << max(2, subdivisions)
 		let depth = depth ?? radius * 4
 		self.bezierPath.usesEvenOddFillRule = true
-		let hiderSize = radius * max(1,outerMult)
+		let hiderSize = radius * max(1, outerMult)
 		self.bezierPath.addFrame(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: hiderSize, height: hiderSize)))
 
 		self.bezierPath.move(to: CGPoint(x: radius, y: 0))
