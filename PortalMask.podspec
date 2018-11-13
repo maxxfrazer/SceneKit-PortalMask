@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "PortalMask"
-  s.version      = "1.1.2"
+  s.version      = "1.2.0"
   s.summary      = "PortalMask window to an AR world"
   s.description  = <<-DESC
   					PortalMask create a window into any collection of SceneKit elements by occluding other things around it.
