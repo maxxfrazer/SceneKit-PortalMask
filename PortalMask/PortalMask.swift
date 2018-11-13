@@ -57,7 +57,7 @@ open class PortalMask: SCNNode {
 	public class func tube(
 		radius: CGFloat, subdivisions: Int = 7,
 		depth: CGFloat! = nil, outerMult: CGFloat = 5
-		) -> PortalMask {
+	) -> PortalMask {
 		let node = PortalMask()
 		let segments = 1 << max(2, subdivisions)
 		let depth = depth ?? radius * 2
