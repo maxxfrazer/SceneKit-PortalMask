@@ -11,6 +11,9 @@ import SceneKit.SCNNode
 /// A node containing a geometry that will create a portal of the specified properties and dimensions.
 open class PortalMask: SCNNode {
 
+
+	var depth: CGFloat = 2.0
+	var outerMult: CGFloat = 3.0
 	/// Initializes a Portal of a given width and height.
 	///
 	/// - Parameters:
@@ -21,8 +24,10 @@ open class PortalMask: SCNNode {
 	///   - outerMult: Optional size the mask around the frame should be. The default is 3, making the
 	///       edge three times the largest dimention of the frame.
 	public init(frameSize: CGSize, depth: CGFloat! = nil, outerMult: CGFloat = 3) {
-		super.init()
+		self.outerMult = outerMult
 		let depth = depth ?? max(frameSize.width, frameSize.height) * 2
+		self.depth = depth
+		super.init()
 		self.bezierPath.usesEvenOddFillRule = true
 
 		let hiderSize = max(frameSize.width, frameSize.height) * max(1, outerMult)
@@ -61,6 +66,8 @@ open class PortalMask: SCNNode {
 		let node = PortalMask()
 		let segments = 1 << max(2, subdivisions)
 		let depth = depth ?? radius * 2
+		node.depth = depth
+		node.outerMult = outerMult
 		let shape = SCNTube(innerRadius: radius / 1.975, outerRadius: radius * outerMult, height: depth)
 		shape.radialSegmentCount = segments
 		let mask = SCNMaterial()
@@ -88,14 +95,16 @@ open class PortalMask: SCNNode {
 	///   - outerMult: Optional size the mask around the frame should be. The default is 5, making the
 	///       edge five times the radius.
 	public init(radius: CGFloat, flatness: CGFloat = 0.005, depth: CGFloat! = nil, outerMult: CGFloat = 5) {
-		super.init()
 		self.bezierPath = UIBezierPath(ovalIn: CGRect(
 			origin: CGPoint(x: -radius, y: -radius),
 			size: CGSize(width: radius * 2, height: radius * 2)
 		))
 		let depth = depth ?? radius * 4
+		self.depth = depth
+		self.outerMult = max(1, outerMult)
+		super.init()
 		self.bezierPath.usesEvenOddFillRule = true
-		let hiderSize = radius * max(1, outerMult)
+		let hiderSize = radius * self.outerMult
 		self.bezierPath.addFrame(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: hiderSize, height: hiderSize)))
 		self.bezierPath.flatness = radius * flatness
 
@@ -107,27 +116,21 @@ open class PortalMask: SCNNode {
 	/// Initializes a Portal based on a given list of points
 	///
 	/// - Parameters:
-	///   - border: A list of points that make up the edge of the portal.
+	///   - path: A list of points that make up the edge of the portal.
 	///   - flatness: Flatness best explained [here](apple-reference-documentation://hsY81TGpr3). The higher
 	///       the value, the less vertices in the geometry, choose a lower value if the geometry is detailed.
 	///   - depth: Optional depth the portal should go back. If no value is given it will default to twice
 	///     	the largest dimention of the frame.
 	///   - outerMult: Optional size the mask around the frame should be. The default is 3, making the
 	///       edge three times the largest dimention of the frame.
-	public init(border: [CGPoint], flatness: CGFloat = 0.6, depth: CGFloat! = nil, outerMult: CGFloat = 3) {
+	public init(path: [CGPoint], flatness: CGFloat = 0.6, depth: CGFloat! = nil, outerMult: CGFloat = 3) {
+		self.outerMult = outerMult
 		super.init()
-		guard let firstPoint = border.first else {
-			return
-		}
-		self.bezierPath.move(to: firstPoint)
-
-		for point in border[1...] {
-			self.bezierPath.addLine(to: point)
-		}
-		self.bezierPath.close()
+		self.bezierPath.addPath(path: path)
 		let bounds = self.bezierPath.bounds
 		let largestDim = max(bounds.width, bounds.height)
 		let depth = depth ?? largestDim * 2
+		self.depth = depth
 		self.bezierPath.usesEvenOddFillRule = true
 		self.bezierPath.addFrame(frame:
 			CGRect(
@@ -140,6 +143,24 @@ open class PortalMask: SCNNode {
 		self.geometryHolder.geometry = self.maskSCNShape(path: self.bezierPath, extrusionDepth: depth)
 		self.geometryHolder.position.z = Float(-depth / 2) + 0.0003
 		self.addChildNode(self.geometryHolder)
+	}
+
+	/// Update the geometry to follow a new list of points
+	///
+	/// - Parameter path: A new list of points to define the shape of the portal
+	public func updateGeometry(with path: [CGPoint]) {
+		self.bezierPath.removeAllPoints()
+		self.bezierPath.addPath(path: path)
+		let bounds = self.bezierPath.bounds
+		self.bezierPath.usesEvenOddFillRule = true
+//		let largestDim = max(bounds.width, bounds.height)
+		self.bezierPath.addFrame(frame:
+			CGRect(
+				origin: CGPoint.zero,
+				size: CGSize(width: bounds.width * self.outerMult, height: bounds.height * self.outerMult)
+			)
+		)
+		self.geometryHolder.geometry = self.maskSCNShape(path: self.bezierPath, extrusionDepth: self.depth)
 	}
 
 	private override init() {
