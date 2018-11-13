@@ -81,12 +81,12 @@ open class PortalMask: SCNNode {
 	/// - Parameters:
 	///   - radius: [CGFloat](apple-reference-documentation://hsX1m9hE7m) of the required portal
 	///   - flatness: How smooth the desired circle will be. Value will be multiplied by
-	///				the radius of the marker. Default value is 0.005.
-	///				Would not recommend going higher than 0.01
+	///       the radius of the marker. Default value is 0.005.
+	///       Would not recommend going higher than 0.01
 	///   - depth: Optional depth the portal should go back. If no value is given it will default to
 	///       four times the radius
 	///   - outerMult: Optional size the mask around the frame should be. The default is 5, making the
-	///				edge five times the radius.
+	///       edge five times the radius.
 	public init(radius: CGFloat, flatness: CGFloat = 0.005, depth: CGFloat! = nil, outerMult: CGFloat = 5) {
 		super.init()
 		self.bezierPath = UIBezierPath(ovalIn: CGRect(
@@ -109,11 +109,11 @@ open class PortalMask: SCNNode {
 	/// - Parameters:
 	///   - border: A list of points that make up the edge of the portal.
 	///   - flatness: Flatness best explained [here](apple-reference-documentation://hsY81TGpr3). The higher
-	///				the value, the less vertices in the geometry, choose a lower value if the geometry is detailed.
+	///       the value, the less vertices in the geometry, choose a lower value if the geometry is detailed.
 	///   - depth: Optional depth the portal should go back. If no value is given it will default to twice
 	///     	the largest dimention of the frame.
 	///   - outerMult: Optional size the mask around the frame should be. The default is 3, making the
-	///				edge three times the largest dimention of the frame.
+	///       edge three times the largest dimention of the frame.
 	public init(border: [CGPoint], flatness: CGFloat = 0.6, depth: CGFloat! = nil, outerMult: CGFloat = 3) {
 		super.init()
 		guard let firstPoint = border.first else {
