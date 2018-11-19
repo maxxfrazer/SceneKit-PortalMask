@@ -1,5 +1,7 @@
 # SceneKit-PortalMask
 
+[See my Medium post about this CocoaPod](https://link.medium.com/4LK2PReBXR)
+
 This class `PortalMask` creates an occluding box around any rectangular frame, including a tracking image, which turns the tracking image or any static area into an Augmented Reality portal into a scene you can define inside that area that can be seen by looking through the defined portal.
 This can also be used to have the illusion of a hole in the ground.
 
