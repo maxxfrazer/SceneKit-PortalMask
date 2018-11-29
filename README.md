@@ -6,7 +6,7 @@ This class `PortalMask` creates an occluding box around any rectangular frame, i
 This can also be used to have the illusion of a hole in the ground.
 
 Include this pod in your project:
-`pod 'PortalMask', :git => 'https://github.com/maxxfrazer/SceneKit-PortalMask.git'`
+`pod 'PortalMask'`
 
 The following example code creates a portal ontop of a tracking marker, similar to the example gif.
 
