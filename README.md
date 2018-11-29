@@ -40,5 +40,6 @@ let portal = PortalMask(path: [CGPoint(x: 1, y: -1), CGPoint(x: 0, y: 1), CGPoin
 
 Here's some basic examples of what you can do with this Pod:
 
-![Tracking Portal Example](media/PortalMask-example.gif)
-![Flappy Bird Example](media/PortalMask-FlappyBird.gif)
+![Tracking Portal Example](https://github.com/maxxfrazer/SceneKit-PortalMask/blob/master/media/PortalMask-example.gif)
+
+![Flappy Bird Example](https://github.com/maxxfrazer/SceneKit-PortalMask/blob/master/media/PortalMask-FlappyBird.gif)
