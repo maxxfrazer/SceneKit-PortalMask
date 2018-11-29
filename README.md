@@ -1,5 +1,7 @@
 # SceneKit-PortalMask
 
+[See my Medium post about this CocoaPod](https://link.medium.com/4LK2PReBXR)
+
 This class `PortalMask` creates an occluding box around any rectangular frame, including a tracking image, which turns the tracking image or any static area into an Augmented Reality portal into a scene you can define inside that area that can be seen by looking through the defined portal.
 This can also be used to have the illusion of a hole in the ground.
 
@@ -41,5 +43,4 @@ let portal = PortalMask(path: [CGPoint(x: 1, y: -1), CGPoint(x: 0, y: 1), CGPoin
 Here's some basic examples of what you can do with this Pod:
 
 ![Tracking Portal Example](https://github.com/maxxfrazer/SceneKit-PortalMask/blob/master/media/PortalMask-example.gif)
-
 ![Flappy Bird Example](https://github.com/maxxfrazer/SceneKit-PortalMask/blob/master/media/PortalMask-FlappyBird.gif)
