@@ -11,7 +11,6 @@ import SceneKit.SCNNode
 /// A node containing a geometry that will create a portal of the specified properties and dimensions.
 open class PortalMask: SCNNode {
 
-
 	var depth: CGFloat = 2.0
 	var outerMult: CGFloat = 3.0
 	/// Initializes a Portal of a given width and height.

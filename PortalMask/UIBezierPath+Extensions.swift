@@ -17,7 +17,7 @@ internal extension UIBezierPath {
 	/// Frame on a [UIBezierPath](apple-reference-documentation://hs-I2UtavK) to draw
 	///
 	/// - Parameter frame: Frame on the [UIBezierPath](apple-reference-documentation://hs-I2UtavK) to draw
-	internal func addFrame(frame: CGRect) {
+	func addFrame(frame: CGRect) {
 		self.move(to: CGPoint(x: -frame.width, y: -frame.height) + frame.origin)
 		self.addLine(to: CGPoint(x: -frame.width, y: frame.height) + frame.origin)
 		self.addLine(to: CGPoint(x: frame.width, y: frame.height) + frame.origin)
@@ -25,7 +25,7 @@ internal extension UIBezierPath {
 		self.close()
 	}
 
-	internal func addPath(path: [CGPoint]) {
+	func addPath(path: [CGPoint]) {
 		guard let firstPoint = path.first else {
 			return
 		}

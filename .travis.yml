@@ -1,0 +1,12 @@
+language: objective-c
+osx_image: xcode10.2
+before_install:
+  - gem install cocoapods -v '1.7.0.beta.3' --no-document
+install:
+  - ./install_swiftlint.sh
+script:
+  - gem install travis --no-document
+  - travis lint .travis.yml --no-interactive
+  - swiftlint
+  - xcodebuild clean build -project PortalMask.xcodeproj -scheme PortalMask -destination "platform=iOS Simulator,name=iPhone X" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+  - pod lib lint

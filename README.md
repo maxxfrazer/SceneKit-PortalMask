@@ -1,5 +1,11 @@
 # SceneKit-PortalMask
 
+[![Version](https://img.shields.io/cocoapods/v/PortalMask.svg)](https://cocoapods.org/pods/PortalMask)
+[![License](https://img.shields.io/cocoapods/l/PortalMask.svg)](https://cocoapods.org/pods/PortalMask)
+[![Platform](https://img.shields.io/cocoapods/p/PortalMask.svg)](https://cocoapods.org/pods/PortalMask)
+[![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://swift.org/)
+[![Build Status](https://travis-ci.com/maxxfrazer/SceneKit-PortalMask.svg?branch=master)](https://travis-ci.com/maxxfrazer/SceneKit-PortalMask)
+
 [See my Medium post about this CocoaPod](https://link.medium.com/4LK2PReBXR)
 
 This class `PortalMask` creates an occluding box around any rectangular frame, including a tracking image, which turns the tracking image or any static area into an Augmented Reality portal into a scene you can define inside that area that can be seen by looking through the defined portal.
